@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="OpenChannel.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OpenChannel"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <muxc:NavigationView PaneDisplayMode="LeftCompact" 
+                         IsBackButtonVisible="Collapsed"
+                         SelectionChanged="Navi_SelectionChanged">
+        <muxc:NavigationView.MenuItems>
+            <muxc:NavigationViewItem Tag="Triaular">
+                <muxc:NavigationViewItem.Icon>
+                    <PathIcon Data="m0 0 L50 100 L100 0 h-10 L65 50 h-30 L10 0 z"/>
+                </muxc:NavigationViewItem.Icon>
+            </muxc:NavigationViewItem>
+            <muxc:NavigationViewItem Tag="Trapezoidal">
+                <muxc:NavigationViewItem.Icon>
+                    <PathIcon Data="M0 0 L30 100 h40 L100 0 h-10 L75 50 h-50 L10 0 z"/>
+                </muxc:NavigationViewItem.Icon>
+            </muxc:NavigationViewItem>
+            <muxc:NavigationViewItem Tag="Rectangular">
+                <muxc:NavigationViewItem.Icon>
+                    <PathIcon Data="m0 0 v100 h100 v-100 h-10 v50 h-80 v-50 Z"/>
+                </muxc:NavigationViewItem.Icon>
+            </muxc:NavigationViewItem>
+            <muxc:NavigationViewItem Tag="Parabolic">
+                <muxc:NavigationViewItem.Icon>
+                    <PathIcon Data="M 0 0 Q 50 200 100 0 h-10 L 74 50 h-45 L 10 0 Z"/>
+                </muxc:NavigationViewItem.Icon>
+            </muxc:NavigationViewItem>
+            <muxc:NavigationViewItem Tag="Circular">
+                <muxc:NavigationViewItem.Icon>
+                    <PathIcon Data="M0 50 a 50, 50 0 1, 0  100 0 a 50, 50 0 1, 0 -100 0 Z 
+                                    M90  50 a 40, 40 0 1, 0 -80 0Z"/>
+                </muxc:NavigationViewItem.Icon>
+            </muxc:NavigationViewItem>
+            <muxc:NavigationViewItem Tag="Elliptical">
+                <muxc:NavigationViewItem.Icon>
+                    <PathIcon Data="M 0 50 a 50,30 0 1, 0  100 0 a 50,30 0 1, 0 -100 0Z 
+                                    M90 50 a 40 22 0 1, 0  -80 0Z"/>
+                </muxc:NavigationViewItem.Icon>
+            </muxc:NavigationViewItem>
+            <muxc:NavigationViewItem Tag="Arch">
+                <muxc:NavigationViewItem.Icon>
+                    <PathIcon Data="M 89.96 76.01 A 162.50, 162.50  28.47 0 1 10.40, 76.01 
+                                                  A  14.50,  14.50  89.72 0 1  0.00, 58.46
+                                                  A  52.00,  52.00 152.09 0 1 100.0, 58.46
+                                                  A  14.50,  14.50  89.72 0 1 89.96, 76.01
+                                    M 94.00 58.46 L   6.00   58.46
+                                                  A  47.00,  47.00  60.00 0 1 95.00, 58.46"/>
+                </muxc:NavigationViewItem.Icon>
+            </muxc:NavigationViewItem>
+        </muxc:NavigationView.MenuItems>
+        <Frame x:Name="contentFrame"/>
+    </muxc:NavigationView>
+</Page>
