@@ -76,7 +76,7 @@ namespace OpenChannel.View
                 UnitSL.Text = "m/m";
                 UnitSR.Text = "m/m";
                 UnitSC.Text = "m/m";
-                UnitQn.Text = "m^3/s";
+                UnitQn.Text = "m^3/s"; //&#x00B3;
                 UnitDn.Text = "m";
 
                 UnitFA.Text = "m^2";

@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using OpenChannel.Model;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,9 +23,16 @@ namespace OpenChannel.View
     /// </summary>
     public sealed partial class OptionPage : Page
     {
+        public Channels MyChannels = null;
         public OptionPage()
         {
             this.InitializeComponent();
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            Channels chans = e.Parameter as Channels;
+            MyChannels = chans;
+            base.OnNavigatedTo(e);
         }
     }
 }

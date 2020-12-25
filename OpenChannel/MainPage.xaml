@@ -14,39 +14,39 @@
                          IsBackButtonVisible="Collapsed"
                          SelectionChanged="Navi_SelectionChanged">
         <muxc:NavigationView.MenuItems>
-            <muxc:NavigationViewItem Tag="Triangular" x:Name="NaviTria">
+            <muxc:NavigationViewItem Content="Triangular" Tag="Triangular" x:Name="NaviTria">
                 <muxc:NavigationViewItem.Icon>
                     <PathIcon Data="m0 0 L50 100 L100 0 h-10 L65 50 h-30 L10 0 z"/>
                 </muxc:NavigationViewItem.Icon>
             </muxc:NavigationViewItem>
-            <muxc:NavigationViewItem Tag="Trapezoidal" x:Name="NaviTrap">
+            <muxc:NavigationViewItem Content="Trapezoidal" Tag="Trapezoidal" x:Name="NaviTrap">
                 <muxc:NavigationViewItem.Icon>
                     <PathIcon Data="M0 0 L30 100 h40 L100 0 h-10 L75 50 h-50 L10 0 z"/>
                 </muxc:NavigationViewItem.Icon>
             </muxc:NavigationViewItem>
-            <muxc:NavigationViewItem Tag="Rectangular" x:Name="NaviRect">
+            <muxc:NavigationViewItem Content="Rectangular" Tag="Rectangular" x:Name="NaviRect">
                 <muxc:NavigationViewItem.Icon>
                     <PathIcon Data="m0 0 v100 h100 v-100 h-10 v50 h-80 v-50 Z"/>
                 </muxc:NavigationViewItem.Icon>
             </muxc:NavigationViewItem>
-            <muxc:NavigationViewItem Tag="Parabolic" x:Name="NaviPara">
+            <muxc:NavigationViewItem Content="Parabolic" Tag="Parabolic" x:Name="NaviPara">
                 <muxc:NavigationViewItem.Icon>
                     <PathIcon Data="M 0 0 Q 50 200 100 0 h-10 L 74 50 h-45 L 10 0 Z"/>
                 </muxc:NavigationViewItem.Icon>
             </muxc:NavigationViewItem>
-            <muxc:NavigationViewItem Tag="Circular" x:Name="NaviCirc">
+            <muxc:NavigationViewItem Content="Circular" Tag="Circular" x:Name="NaviCirc">
                 <muxc:NavigationViewItem.Icon>
                     <PathIcon Data="M0 50 a 50, 50 0 1, 0  100 0 a 50, 50 0 1, 0 -100 0 Z 
                                     M90  50 a 40, 40 0 1, 0 -80 0Z"/>
                 </muxc:NavigationViewItem.Icon>
             </muxc:NavigationViewItem>
-            <muxc:NavigationViewItem Tag="Elliptical" x:Name="NaviElli">
+            <muxc:NavigationViewItem Content="Elliptical" Tag="Elliptical" x:Name="NaviElli">
                 <muxc:NavigationViewItem.Icon>
                     <PathIcon Data="M 0 50 a 50,30 0 1, 0  100 0 a 50,30 0 1, 0 -100 0Z 
                                     M90 50 a 40 22 0 1, 0  -80 0Z"/>
                 </muxc:NavigationViewItem.Icon>
             </muxc:NavigationViewItem>
-            <muxc:NavigationViewItem Tag="Arch"  x:Name="NaviArch">
+            <muxc:NavigationViewItem Content="Arch" Tag="Arch"  x:Name="NaviArch">
                 <muxc:NavigationViewItem.Icon>
                     <PathIcon Data="M 89.96 76.01 A 162.50, 162.50  28.47 0 1 10.40, 76.01 
                                                   A  14.50,  14.50  89.72 0 1  0.00, 58.46

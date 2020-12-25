@@ -9,7 +9,19 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock Text="Option" />
-
+        <StackPanel>
+            <ToggleSwitch x:Name="ToggleSwitchUnit" 
+                      OffContent="SI Units (metric)"
+                      OnContent="U.S. Customery Units"
+                      IsOn="{x:Bind MyChannels.IsUSCustomary, Mode=Twoway}" />
+            <ToggleSwitch x:Name="ToggleSwitchRating" 
+                      OffContent="Rating curve off"
+                      OnContent="rating curve on"
+                      IsOn="{x:Bind MyChannels.IsRatingCurve, Mode=Twoway}" />
+            <ToggleSwitch x:Name="ToggleSwitchEnergy" 
+                      OffContent="Energy curve off"
+                      OnContent="Energy curve on"
+                      IsOn="{x:Bind MyChannels.IsEnergyCurve, Mode=Twoway}" />
+        </StackPanel>
     </Grid>
 </Page>

@@ -36,7 +36,7 @@ namespace OpenChannel
 
             if (args.IsSettingsSelected)
             {
-                contentFrame.Navigate(typeof(OptionPage));
+                contentFrame.Navigate(typeof(OptionPage), MyChannels);
             }
             else
             {
