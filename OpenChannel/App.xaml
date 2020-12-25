@@ -5,10 +5,21 @@
     xmlns:local="using:OpenChannel">
     <!--Thanks for installing the WinUI NuGet package!
     Don't forget to set XamlControlsResources as your Application resources in App.xaml:-->
-
     <Application.Resources>
-        <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <ResourceDictionary Source="ViewModel/Dictionary1.xaml"/>
+                <!-- Other merged dictionaries here -->
+            </ResourceDictionary.MergedDictionaries>
+            <!-- Other app resources here -->
+
+        </ResourceDictionary>
     </Application.Resources>
+
+    <!--<Application.Resources>
+        <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+    </Application.Resources>-->
 
     <!--or if you have other resources then add XamlControlsResources at the top as a merged dictionary:
 

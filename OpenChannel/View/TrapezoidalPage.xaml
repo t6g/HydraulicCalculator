@@ -3,12 +3,207 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:OpenChannel.View"
+    xmlns:vm="using:OpenChannel.ViewModel"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Loading="Page_Loading"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock Text="Trapezoidal" />
-    </Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="10" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!--Title-->
+            <TextBlock Margin="2" Grid.Column="1" Grid.Row="0" 
+                       Style="{StaticResource BaseTextBlockStyle}"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                       TextAlignment="Center" Text="Cross Section" />
+
+            <!--x label-->
+            <TextBlock Margin="2" Grid.Column="1" Grid.Row="2" 
+                       Style="{StaticResource BodyTextBlockStyle}"
+                       TextAlignment="Center" Text="Station" />
+
+            <!--y label-->
+            <TextBlock Margin="10,100,-30,0" Grid.Column="0" Grid.Row="1"
+                       Style="{StaticResource BodyTextBlockStyle}"
+                       extensions:VisualExtensions.RotationAngleInDegrees="-90"
+                       VerticalAlignment="Center" TextAlignment="Center"
+                       Text="Elevation">
+            </TextBlock>
+
+            <!-- Chart -->
+            <Grid Name="ChartGrid" 
+                  Grid.Row="1" Grid.Column="1" 
+                  SizeChanged="ChartGrid_SizeChanged">
+                <Canvas>
+                    <Rectangle Width="{x:Bind ViewModel.ViewWidth, Mode=OneWay}" 
+                           Height="{x:Bind ViewModel.ViewHeight, Mode=OneWay}" 
+                           Stroke="Gray" 
+                           Canvas.Left="{x:Bind ViewModel.OffsetLeft, Mode=OneWay}"
+                           Canvas.Top="{x:Bind ViewModel.OffsetTop, Mode=OneWay}"/>
+
+                    <ItemsControl ItemsSource="{x:Bind ViewModel.TickLabels}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:TickLabelINPC">
+                                <TextBlock Text="{x:Bind Text, Mode=OneWay}" TextAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock.RenderTransform>
+                                        <TranslateTransform X="{x:Bind Left, Mode=OneWay}" Y="{x:Bind Top, Mode=OneWay}" />
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <Path Stroke="Olive" StrokeThickness="2" Data="{x:Bind ViewModel.ChCSPath, Mode=OneWay}" />
+
+                    <Path Stroke="Blue" StrokeThickness="1" Data="{x:Bind ViewModel.NormPath, Mode=OneWay}" />
+
+                    <Path Stroke="Red" StrokeThickness="1" Data="{x:Bind ViewModel.CritPath, Mode=OneWay}" />
+
+                    <Path Stroke="Gray" StrokeThickness="1" StrokeDashArray="1,3" Data="{x:Bind ViewModel.GridPath, Mode=OneWay}" />
+
+                    <Path Stroke="Blue" StrokeThickness="1" StrokeDashArray="1" Data="{x:Bind ViewModel.DischargePath, Mode=OneWay}" x:Name="PathRatingCurve"/>
+
+                    <Path Stroke="Red" StrokeThickness="1" StrokeDashArray="1" Data="{x:Bind ViewModel.EnergyPath, Mode=OneWay}"  x:Name="PathEnergyCurve"/>
+
+                </Canvas>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" HorizontalAlignment="Center" Margin="10" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Left Side Slope"   Grid.Row="0" VerticalAlignment="Center" Margin="10,2,2,2" />
+            <TextBlock Text="Bottom Width"      Grid.Row="1" VerticalAlignment="Center" Margin="10,2,2,2" />
+            <TextBlock Text="Right Side Slope"  Grid.Row="2" VerticalAlignment="Center" Margin="10,2,2,2" />
+            <TextBlock Text="Channel Slope"     Grid.Row="3" VerticalAlignment="Center" Margin="10,2,2,2" />
+            <TextBlock Text="Manning's N"       Grid.Row="4" VerticalAlignment="Center" Margin="10,2,2,2" />
+            <TextBlock Text="Normal Depth"      Grid.Row="5" VerticalAlignment="Center" Margin="10,2,2,2" />
+            <TextBlock Text="Discharge"         Grid.Row="6" VerticalAlignment="Center" Margin="10,2,2,2" />
+
+            <muxc:NumberBox Value="{x:Bind ViewModel.SlopeLeft, Mode=TwoWay}" 
+                            ValidationMode="InvalidInputOverwritten" Width="70"
+                            NumberFormatter="{x:Bind ViewModel.DF2}"
+                            Minimum="0.0" Maximum="100" Grid.Row="0" Grid.Column="1" Margin="12,2,2,2" />
+            <muxc:NumberBox Value="{x:Bind ViewModel.WidthBottom, Mode=TwoWay}" 
+                            ValidationMode="InvalidInputOverwritten" Width="70"
+                            NumberFormatter="{x:Bind ViewModel.DF2}"
+                            Minimum="0.0" Maximum="100" Grid.Row="1" Grid.Column="1" Margin="12,2,2,2" />
+            <muxc:NumberBox Value="{x:Bind ViewModel.SlopeRight, Mode=TwoWay}" 
+                            ValidationMode="InvalidInputOverwritten" Width="70"
+                            NumberFormatter="{x:Bind ViewModel.DF2}"
+                            Minimum="0.01" Maximum="100" Grid.Row="2" Grid.Column="1" Margin="12,2,2,2" />
+            <muxc:NumberBox Value="{x:Bind ViewModel.SlopeChannel, Mode=TwoWay}" 
+                            ValidationMode="InvalidInputOverwritten" Width="70"
+                            NumberFormatter="{x:Bind ViewModel.DF4}"
+                            Minimum="0.0001" Maximum="10" Grid.Row="3" Grid.Column="1" Margin="12,2,2,2" />
+            <muxc:NumberBox Value="{x:Bind ViewModel.ManningsN, Mode=TwoWay}" 
+                            ValidationMode="InvalidInputOverwritten" Width="70"
+                            NumberFormatter="{x:Bind ViewModel.DF4}"
+                            Minimum="0.0001" Maximum="100" Grid.Row="4" Grid.Column="1" Margin="12,2,2,2" />
+            <muxc:NumberBox Value="{x:Bind ViewModel.DepthNormal, Mode=TwoWay}" 
+                            ValidationMode="InvalidInputOverwritten" Width="70"
+                            NumberFormatter="{x:Bind ViewModel.DF2}"
+                            Minimum="0.01" Maximum="100" Grid.Row="5" Grid.Column="1" Margin="12,2,2,2" />
+            <muxc:NumberBox Value="{x:Bind ViewModel.Discharge, Mode=TwoWay}" 
+                            ValidationMode="InvalidInputOverwritten" Width="70"
+                            NumberFormatter="{x:Bind ViewModel.DF2}"
+                            Minimum="0.01" Maximum="10000" Grid.Row="6" Grid.Column="1" Margin="12,2,2,2" />
+
+            <Button Name="SelectN" Content="" 
+                    Grid.Row="4" Grid.Column="2" Margin="2,2,2,2" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center" 
+                    Height="12" Width="12" 
+                    Click="SelectN_Click">
+            </Button>
+
+            <TextBlock x:Name="UnitSL" Text="ft/ft" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" TextAlignment="Right" Margin="2,2,2,2" />
+            <TextBlock x:Name="UnitBW" Text="ft"    Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Right" Margin="2,2,2,2" />
+            <TextBlock x:Name="UnitSR" Text="ft/ft" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" TextAlignment="Right" Margin="2,2,2,2" />
+            <TextBlock x:Name="UnitSC" Text="ft/ft" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" TextAlignment="Right" Margin="2,2,2,2" />
+            <TextBlock x:Name="UnitDn" Text="ft"    Grid.Column="3" Grid.Row="5" VerticalAlignment="Center" TextAlignment="Right" Margin="2,2,2,2" />
+            <TextBlock x:Name="UnitQn" Text="cfs"   Grid.Column="3" Grid.Row="6" VerticalAlignment="Center" TextAlignment="Right" Margin="2,2,2,2" />
+
+            <TextBlock Text="Flow Area"           Grid.Column="4" Grid.Row="0" VerticalAlignment="Center" Margin="10,2,2,2"/>
+            <TextBlock Text="Wetted Perimeter"    Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" Margin="10,2,2,2" />
+            <TextBlock Text="Hydraulic Radius"    Grid.Column="4" Grid.Row="2" VerticalAlignment="Center" Margin="10,2,2,2" />
+            <TextBlock Text="Velocity"            Grid.Column="4" Grid.Row="3" VerticalAlignment="Center" Margin="10,2,2,2" />
+            <TextBlock Text="Water Surface Width" Grid.Column="4" Grid.Row="4" VerticalAlignment="Center" Margin="10,2,2,2" />
+            <TextBlock Text="Critical Depth"      Grid.Column="4" Grid.Row="5" VerticalAlignment="Center" Margin="10,2,2,2" />
+            <TextBlock Text="Critical Velocity"   Grid.Column="4" Grid.Row="6" VerticalAlignment="Center" Margin="10,2,2,2" />
+            <TextBlock Text="Critical Slope"      Grid.Column="4" Grid.Row="7" VerticalAlignment="Center" Margin="10,2,2,2" />
+            <TextBlock Text="Froude Number"       Grid.Column="4" Grid.Row="8" VerticalAlignment="Center" Margin="10,2,2,2" />
+
+            <TextBlock Text="{x:Bind ViewModel.AreaNormal, Mode=OneWay, Converter={StaticResource DoubleConverter}, ConverterParameter=' {0:F2}'}" 
+                       Grid.Row="0" Grid.Column="5" Width="50" Margin="10,2,12,2" VerticalAlignment="Center" TextAlignment="Right"/>
+            <TextBlock Text="{x:Bind ViewModel.PerimeterNormal, Mode=OneWay, Converter={StaticResource DoubleConverter}, ConverterParameter=' {0:F2}'}"  
+                       Grid.Row="1" Grid.Column="5" Width="50" Margin="10,2,12,2" VerticalAlignment="Center"  TextAlignment="Right"/>
+            <TextBlock Text="{x:Bind ViewModel.HydraulicRadiusNormal, Mode=OneWay, Converter={StaticResource DoubleConverter}, ConverterParameter=' {0:F2}'}"  
+                       Grid.Row="2" Grid.Column="5" Width="50" Margin="10,2,12,2" VerticalAlignment="Center"  TextAlignment="Right"/>
+            <TextBlock Text="{x:Bind ViewModel.VelocityNormal, Mode=OneWay, Converter={StaticResource DoubleConverter}, ConverterParameter= ' {0:F2}'}"  
+                       Grid.Row="3" Grid.Column="5" Width="50" Margin="10,2,12,2" VerticalAlignment="Center"  TextAlignment="Right"/>
+            <TextBlock Text="{x:Bind ViewModel.TopWidthNormal, Mode=OneWay, Converter={StaticResource DoubleConverter}, ConverterParameter= ' {0:F2}'}"  
+                       Grid.Row="4" Grid.Column="5" Width="50" Margin="10,2,12,2" VerticalAlignment="Center"  TextAlignment="Right"/>
+            <TextBlock Text="{x:Bind ViewModel.DepthCritical, Mode=OneWay, Converter={StaticResource DoubleConverter}, ConverterParameter= ' {0:F2}'}"  
+                       Grid.Row="5" Grid.Column="5" Width="50" Margin="10,2,12,2" VerticalAlignment="Center"  TextAlignment="Right" />
+            <TextBlock Text="{x:Bind ViewModel.VelocityCritical, Mode=OneWay, Converter={StaticResource DoubleConverter}, ConverterParameter= ' {0:F2}'}"  
+                       Grid.Row="6" Grid.Column="5" Width="50" Margin="10,2,12,2" VerticalAlignment="Center"  TextAlignment="Right" />
+            <TextBlock Text="{x:Bind ViewModel.SlopeCritical, Mode=OneWay, Converter={StaticResource DoubleConverter}, ConverterParameter= ' {0:F4}'}"  
+                       Grid.Row="7" Grid.Column="5" Width="50" Margin="10,2,12,2" VerticalAlignment="Center"  TextAlignment="Right" Padding="0,7,0,0" />
+            <TextBlock Text="{x:Bind ViewModel.FroudeNumber, Mode=OneWay, Converter={StaticResource DoubleConverter}, ConverterParameter= ' {0:F2}'}"  
+                       Grid.Row="8" Grid.Column="5" Width="50" Margin="10,2,12,2" VerticalAlignment="Center"  TextAlignment="Right" Padding="0,7,0,0" />
+
+            <TextBlock x:Name="UnitFA" Text="sf"    Grid.Column="6" Grid.Row="0" VerticalAlignment="Center" TextAlignment="Right" Margin="2,2,12,2" />
+            <TextBlock x:Name="UnitWP" Text="ft"    Grid.Column="6" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Right" Margin="2,2,12,2" />
+            <TextBlock x:Name="UnitHR" Text="ft"    Grid.Column="6" Grid.Row="2" VerticalAlignment="Center" TextAlignment="Right" Margin="2,2,12,2" />
+            <TextBlock x:Name="UnitVE" Text="fps"   Grid.Column="6" Grid.Row="3" VerticalAlignment="Center" TextAlignment="Right" Margin="2,2,12,2" />
+            <TextBlock x:Name="UnitTW" Text="ft"    Grid.Column="6" Grid.Row="4" VerticalAlignment="Center" TextAlignment="Right" Margin="2,2,12,2" />
+            <TextBlock x:Name="UnitDC" Text="ft"    Grid.Column="6" Grid.Row="5" VerticalAlignment="Center" TextAlignment="Right" Margin="2,2,12,2" />
+            <TextBlock x:Name="UnitVC" Text="fps"   Grid.Column="6" Grid.Row="6" VerticalAlignment="Center" TextAlignment="Right" Margin="2,2,12,2" />
+            <TextBlock x:Name="UnitCS" Text="ft/ft" Grid.Column="6" Grid.Row="7" VerticalAlignment="Center" TextAlignment="Right" Margin="2,2,12,2" />
+        </Grid>    </Grid>
 </Page>

@@ -119,10 +119,42 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\ArchGeometryCD.xaml.cs">
+      <DependentUpon>ArchGeometryCD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\CircularDiameterCD.xaml.cs">
+      <DependentUpon>CircularDiameterCD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\EllipticalRiseSpanCD.xaml.cs">
+      <DependentUpon>EllipticalRiseSpanCD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\ManningsNCD.xaml.cs">
+      <DependentUpon>ManningsNCD.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\ArchChannel.cs" />
+    <Compile Include="Model\Channel.cs" />
+    <Compile Include="Model\Channels.cs" />
+    <Compile Include="Model\CircularChannel.cs" />
+    <Compile Include="Model\Constants.cs" />
+    <Compile Include="Model\EllipticalChannel.cs" />
+    <Compile Include="Model\Miscellany.cs" />
+    <Compile Include="Model\ParabolicChannel.cs" />
+    <Compile Include="Model\RectangularChannel.cs" />
+    <Compile Include="Model\TrapezoidalChannel.cs" />
+    <Compile Include="Model\TriangularChannel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ArchVM.cs" />
+    <Compile Include="ViewModel\ChannelVM.cs" />
+    <Compile Include="ViewModel\CircularVM.cs" />
+    <Compile Include="ViewModel\EllipticalVM.cs" />
+    <Compile Include="ViewModel\ParabolicVM.cs" />
+    <Compile Include="ViewModel\RectangularVM.cs" />
+    <Compile Include="ViewModel\TrapezoidalVM.cs" />
+    <Compile Include="ViewModel\TriangularVM.cs" />
+    <Compile Include="ViewModel\Utility.cs" />
     <Compile Include="View\ArchPage.xaml.cs">
       <DependentUpon>ArchPage.xaml</DependentUpon>
     </Compile>
@@ -168,9 +200,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Dialog\ArchGeometryCD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\CircularDiameterCD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\EllipticalRiseSpanCD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\ManningsNCD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViewModel\Dictionary1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ArchPage.xaml">
       <SubType>Designer</SubType>
@@ -209,14 +261,17 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>6.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
+      <Version>6.1.1</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.5.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

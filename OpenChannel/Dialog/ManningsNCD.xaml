@@ -1,0 +1,22 @@
+﻿<ContentDialog
+    x:Class="OpenChannel.Dialog.ManningsNCD"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OpenChannel.Dialog"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Select Manning's N"
+    PrimaryButtonText="Select"
+    SecondaryButtonText="Cancel">
+
+    <controls:DataGrid x:Name="SelectN" 
+                       AutoGenerateColumns="True" 
+                       ItemsSource="{x:Bind ManningsNTable}"
+                       GridLinesVisibility="All"
+                       IsReadOnly="True"
+                       SelectionMode="Single"
+                       PointerPressed="SelectN_PointerPressed" />
+
+</ContentDialog>

@@ -14,6 +14,13 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using OpenChannel.Model;
+using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.Storage.Streams;
+using System.Text;
+using System.Xml.Serialization;
+using Windows.UI.Popups;
 
 namespace OpenChannel
 {
@@ -26,8 +33,14 @@ namespace OpenChannel
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
+        public Channels MyChannels = null;
+
         public App()
         {
+            Task.Run(()=>ReadXML()).Wait();
+
+            if (MyChannels == null) MyChannels = new Channels();
+
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
@@ -66,7 +79,7 @@ namespace OpenChannel
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(MainPage), MyChannels);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
@@ -90,11 +103,71 @@ namespace OpenChannel
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+            await WriteXMLAsync();
             deferral.Complete();
+        }
+        public async Task ReadXML()
+        {
+            try
+            {
+                string xmlString;
+                StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync("channel.xml");
+                using (var fs = await file.OpenAsync(FileAccessMode.Read))
+                {
+                    using (var inStream = fs.GetInputStreamAt(0))
+                    {
+                        using (var reader = new DataReader(inStream))
+                        {
+                            await reader.LoadAsync((uint)fs.Size);
+                            xmlString = reader.ReadString((uint)fs.Size);
+                            reader.DetachStream();
+                        }
+                    }
+                }
+
+                var ms = new MemoryStream(Encoding.UTF8.GetBytes(xmlString));
+                XmlSerializer deserializer = new XmlSerializer(typeof(Channels));
+                MyChannels = (Channels)deserializer.Deserialize(ms);
+
+                //if(MyChannels.ManningsNTable.Count() <= 0)
+                //    Task.Run(() => MyChannels.ReadManningsNAsync()).Wait();
+
+                MyChannels.SetOptions();
+                //MyChannels.Validate();
+            }
+            catch (FileNotFoundException ex)
+            {
+                //var dlg = new MessageDialog(ex.Message, "Open file failed!");
+                //await dlg.ShowAsync();
+            }
+            catch (Exception ex)
+            {
+                //var dlg = new MessageDialog(ex.Message, "Open file failed!");
+                //await dlg.ShowAsync();
+            }
+        }
+
+        public async Task WriteXMLAsync()
+        {
+            try
+            {
+                StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("channel.xml", CreationCollisionOption.ReplaceExisting);
+                using (var stream = await file.OpenStreamForWriteAsync())
+                {
+                    var ser = new XmlSerializer(typeof(Channels));
+                    ser.Serialize(stream, MyChannels);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                var dlg = new MessageDialog(ex.Message, "Save to file failed!");
+                await dlg.ShowAsync();
+            }
         }
     }
 }
