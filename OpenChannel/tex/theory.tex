@@ -1,0 +1,158 @@
+\section{Theory}
+\subsection{Manning's Equation}
+The Manning's equation for the velocity and discharge of uniform flow in open channels is \cite{Chow1959,French1985,Munson2013,hds4}:
+\begin{equation}  
+v = \frac{K_u}{n}R^{\frac{2}{3}}S^{\frac{1}{2}},
+\label{Eq:v}
+\end{equation}
+\begin{equation}  
+Q = vA = \frac{K_u}{n}AR^{\frac{2}{3}}S^{\frac{1}{2}}=\frac{K_u}{n}A^{\frac{5}{3}}P^{-\frac{2}{3}}S^{\frac{1}{2}},
+\label{Eq:Q}
+\end{equation}
+where
+\begin{itemize}
+\item[] $v$ = Mean velocity, m/s (ft/s),
+\item[] $Q$ = Discharge, $m^3/s$ ($ft^3/s$),
+\item[] $n$ = Manning's coefficient of roughness,
+\item[] $R$ = Hydraulic radius, m (ft). $R = P/A$,
+\item [] $P$ = Wetted perimeter, m (ft),
+\item [] $A$ = Crossing-section area of flowing water perpendicular to the direction of flow, $m^2$ ($ft^2$),
+\item[] $S$ = Energy slope, m/m (ft/ft). For steady uniform flow $S=S_0$ , and
+\item[] $K_u$ = units conversion factor, 1 for SI, 1.486 for English units.
+\end{itemize}
+
+\subsection{Normal Depth}
+Depending on the geometry of the channel, both $A$ and $P$ are depdent on normal depth $y$. To calculate $y$ for a given $Q$, we solve 
+
+\begin{equation}  
+f_d(y_{i})= \frac{K_u}{n}A^{\frac{5}{3}}P^{-\frac{2}{3}}S^{\frac{1}{2}} - Q 
+\end{equation}
+
+\noindent for $f_d(y_{i}) = 0$. Analytical solutions are available in some special cases, for example, triangular channels. In general, a numerical solution is used to solve the nonlinear equation iteratively. Using Newton's method \cite{Strang1991}, the iteration starts with an initial guess $y_0$, and iterates with
+\begin{equation}  
+y_{i+1} = y_i -\frac{f_d(y_{i})}{f_d'(y_{i})}
+\end{equation}
+where
+\begin{equation}  
+f'_d(y_{i})=\frac{\partial f_d}{\partial y}= \frac{K_u}{n}S^{\frac{1}{2}}\left(\frac{5}{3}R^{\frac{2}{3}}\frac{\partial A}{\partial y} -  \frac{2}{3}R^{\frac{5}{3}}\frac{\partial P}{\partial y}\right)
+\end{equation}
+
+\noindent until 
+\begin{equation}  
+|f_d(y_{i})| \leq TOLQ, 
+\label{Eq:TOLQ}
+\end{equation}
+
+\begin{equation}  
+|y_{i+1} - y_i| \leq TOLD, 
+\label{Eq:TOLD}
+\end{equation}
+
+\noindent or 
+\begin{equation}  
+i \geq MAXI 
+\label{Eq:MAXI}
+\end{equation}
+with 
+\begin{itemize}
+\item[] $TOLQ$ = discharge tolerance, $m^3/s$ ($ft^3/s$),
+\item[] $TOLD$ =depth tolerance, $m$ ($ft$),
+\item[] $MAXI$ = maximum number of iteration.
+\end{itemize}
+
+\noindent When the iteration stops with criteria Eq.(\ref{Eq:MAXI}), an error is shown to notify the user. The user may adjust $y_0$ or $t_0$, $TOLQ$, $TOLD$, and/or $MAXI$ to obtain a satisfactory solution. 
+
+\noindent For circular, elliptical, and arch pipes, a replacement of variable $y$ with an alternative variable $t$ (for example) is convient. These equations remain valid. An alternative tolerance $TOLA$ (in lieu of $TOLD$) is specified when $t$ is an angle.
+
+For open channel flow in closed conduits such as circular, elliptical, and arch pipes, the calculated discharge peaks before the pipe is full \cite{Chow1959,French1985,Munson2013}. 
+The normal depth $y_{max}$ or $t_{max}$ at peak discharge $Q_{max}$ can be calculated by solving
+\begin{equation}  
+\frac{\partial Q}{\partial t} = \frac{K_u}{n} \left(\frac{5}{3}R^{\frac{2}{3}}\frac{\partial A}{\partial t} -  \frac{2}{3}R^{\frac{5}{3}}\frac{\partial P}{\partial t}\right) S^{\frac{1}{2}}=0.
+\end{equation}
+or
+\begin{equation}  
+f(t) = 5P\frac{\partial A}{\partial t} -  2 A\frac{\partial P}{\partial t} = 5PA' -  2 AP' = 0.
+\label{Eq:MaxQ}
+\end{equation}
+
+\noindent In absence of an analytical solution, Newton's method is used with
+\begin{equation}  
+t _{i+1} = t _i - \frac{f(t _i)}{f'(t_i)},
+\end{equation}
+\begin{equation}  
+f'(t_i) = 5A''P  + 3A'P' - 2AP''.
+\end{equation}
+
+\noindent If $Q > Q_{max}$ , an error is shown with $y_{max}$ returned as normal depth.  
+
+\noindent In cases where $Q$ is not a monotonically increasing function with $y$, multiple $y$ values may result in the same $Q$ value. The lowest value is returned as normal depth. 
+
+\noindent In summary, to calculate normal depth with Newton's method, we need A, P, A' and  P'. A'' and P'' are needed when $Q_{max}$ needs to be calculated using Newton's method.
+
+\subsection{Critical Depth}
+Critical flow occurs when the specific energy
+\begin{equation}
+E = \frac{v^2}{2g} + y =\frac{Q^2}{2gA^2} + y 
+\end{equation}
+reaches a minimum ($g$ is acceleration of gravity, 32.17 $ft/s^2$ for US Customery units, 9.81 $m/s^2$ for SI). Namely,
+\begin{equation}
+\frac{\partial E}{\partial y} =  -\frac{Q^2}{gA^3}\frac{\partial A}{\partial y} + 1 = 0.
+\end{equation}
+To solve the equation with Newton's method, critical depth $y_c$ or $t_c$ is calculated by
+\begin{equation}  
+t_{c,i+1} = t_{c,i} -\frac{f(t_{c,i})}{f'(t_{c,i})}
+\end{equation}
+where
+\begin{equation}  
+f_c(t)= gA^3 - Q^2\frac{\partial A}{\partial y} 
+\label{Eq:C}
+\end{equation}
+
+\begin{equation}  
+f'_c(t)= 3gA^2\frac{\partial A}{\partial t} - Q^2\frac{\partial}{\partial t}\left(\frac{\partial A}{\partial y}\right) 
+\end{equation}
+
+\noindent The critical velocity $v_c$ is 
+\begin{equation}
+v_c = \frac{Q}{A_c} = \sqrt{g \frac{A}{\frac{\partial A}{\partial y}}} = \sqrt{gD}
+\end{equation}
+where $D = A/\frac{\partial A}{\partial y}$ is the hydraulic depth.
+
+\noindent The Froude number, $F = v/v_c$. The critical slope $S_c$ is backcalculated from Eq. (\ref{Eq:v}).
+
+%\begin{equation}  
+%f_c(y_{i})= 1 - \frac{Q^2}{gA^3}\frac{\partial A}{\partial y} 
+%\end{equation}
+
+%\begin{equation}  
+%f'_c(y_{i})= \frac{Q^2}{gA^3} \left[ 3 \left(\frac{\partial A}{\partial y}\right)^2 - A\frac{\partial ^2 A}{\partial y^2}   \right] 
+%\end{equation}
+
+%for A and y are parameterized as a function of $t$ with $A=A(t)$, $A'=\frac{\partial A(t)} {\partial t}$, $y=y(t)$, $y'=\frac{\partial y(t)}{\partial t}$, 
+
+%For $y=y_c$,
+%\begin{equation}
+%Q_c^2 = \frac{gA^3}{\frac{\partial A}{\partial y}} 
+%\end{equation}
+
+%\begin{equation}  
+%t_{c,i+1} = t_{c,i} -\frac{f(t_{c,i})}{f'(t_{c,i})}
+%\end{equation}
+
+%\begin{equation}  
+%f_c(t)= gA^3(t) - Q^2\frac{\partial A}{\partial y}(t) = gA^3 - Q^2 A' / y'
+%\end{equation}
+
+%\begin{equation}  
+%f'_c(t)= 3gA^2\frac{\partial A}{\partial t} - Q^2\frac{\partial}{\partial t}\left(\frac{\partial A}{\partial y}\right) = 3gA^2A' - Q^2 \frac{A''y' - A'y''}{y'^2}
+%\end{equation}
+
+%\begin{equation}  
+%f_c(t)= 1 - \frac{Q^2}{gA^3}\frac{A'}{y'} 
+%\end{equation}
+
+%\begin{equation}  
+%f'_c(t)= \frac{Q^2}{gA^3} \left[ 3 \left(\frac{\partial A}{\partial y}\right)^2 - A\frac{\partial ^2 A}{\partial y^2}   \right] 
+%\end{equation}
+
+
