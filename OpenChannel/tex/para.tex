@@ -21,7 +21,7 @@
 \end{tikzpicture}
 \end{figure}
 
-For a parabola with top width $T$ and depth $d$,
+\noindent For a parabola with top width $T$ and depth $d$,
 \begin{equation}  
 y= 4\frac{d}{T^2}x^2
 \end{equation}
@@ -31,14 +31,14 @@ A= 2xy - \int_{-x}^x 4\frac{d}{T^2}x^2 dx = \frac{16}{3}\frac{d}{T^2}x^3 = \frac
 \end{equation}
 
 \begin{equation}  
-\frac{\partial A}{\partial y}= T\sqrt{\frac{y}{d}}
+\frac{\partial A}{\partial y}= T\sqrt{\frac{y}{d}} = 2x = T_w
 \end{equation}
 
 \begin{equation}  
 \frac{\partial ^2A}{\partial y^2}= \frac{T}{2\sqrt{yd}}
 \end{equation}
 
-To calculate $P$ and $P'$,
+\noindent To calculate $P$ % and $P'$,
 \begin{equation}  
 P= 2\int_0^y \sqrt{1 + (dx/dy)^2}dy
 \end{equation}
@@ -76,9 +76,18 @@ P= 2\int_0^y \sqrt{1 + (dx/dy)^2}dy = 2\int_0^y \sqrt{1 + \frac{a}{y}} dy
                        + \frac{2y + a}{\sqrt{y^2+ay}}
 \end{equation}
 
-Let $z = \sqrt{y^2 + ay}$, 
+\noindent Let $z = \sqrt{y^2 + ay}$, 
 \begin{equation}  
 \frac{dP}{dy} = a \frac{\frac{2y + a}{z} + 1}{z + y} - a \frac{\frac{2y + a}{z}-1}{z-y} + \frac{2y + a}{z}
                        = a \frac{2y + a + z}{z^2 + yz} - a \frac{2y + a - z}{z^2 - yz} + \frac{2y + a}{z}
 \end{equation}
 
+\begin{equation}  
+D_h = \frac{A}{\frac{\partial A}{\partial y}} = \frac{ \frac{2}{3}\frac{T}{\sqrt{d}}y^{\frac{3}{2}}}{T\sqrt{\frac{y}{d}}} = \frac{2}{3}y_c
+\end{equation}
+
+\begin{equation}  
+v_c = \sqrt{\frac{2}{3}gy_c}
+\end{equation}
+
+\noindent Neton's method is used to calculate normal depth $y_n$ and critical depth $y_c$. 

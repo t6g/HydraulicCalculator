@@ -25,15 +25,17 @@ P = \left(\sqrt{1+z_1^2} + \sqrt{1+z_2^2}\right)y
 \begin{equation}
 R = \frac{1}{2}\frac{(z_1 + z_2) }{\sqrt{1+z_1^2} + \sqrt{1+z_2^2}}y
 \end{equation}
-Eq. (\ref{Eq:Q}) becomes
+For normal flow, Eq. (\ref{Eq:Q}) becomes
 \begin{equation}
 Q = \frac{K_u}{n} \frac{z_1 + z_2}{2}  \left(\frac{1}{2}\frac{z_1 + z_2}{\sqrt{1+z_1^2} + \sqrt{1+z_2^2}}\right)^{\frac{2}{3}} y^{\frac{8}{3}}S^{\frac{1}{2}}.
 \end{equation}
-Note this equation can be used to backcalculate $y$ from $Q$.
+Note this equation can be used to backcalculate normal depth $y_n$ from $Q$.
 \begin{equation}
-\frac{\partial A}{\partial y} = (z_1 + z_2)y
+\frac{\partial A}{\partial y} = (z_1 + z_2)y = T_w
 \end{equation}
-Eq. (\ref{Eq:C}) becomes
+with $T_w$ as the width of the water surface.
+
+\noindent For critical flow, Eq. (\ref{Eq:C}) becomes
 \begin{equation}  
 f_c(y)= \frac{g}{8}(z_1 + z_2)^3y^6 - Q^2(z_1 + z_2)y = 0.
 \end{equation}
@@ -42,3 +44,10 @@ f_c(y)= \frac{g}{8}(z_1 + z_2)^3y^6 - Q^2(z_1 + z_2)y = 0.
 y_c^5 = \frac{8Q^2}{g(z_1 + z_2)^2}
 \end{equation}
 
+\begin{equation}  
+D_h = \frac{A}{\frac{\partial A}{\partial y}} = \frac{\frac{1}{2} (z_1 + z_2) y^2}{(z_1 + z_2)y} = \frac{1}{2}(z_1 + z_2)y_c
+\end{equation}
+
+\begin{equation}  
+v_c = \sqrt{\frac{1}{2}g(z_1 + z_2)y_c}
+\end{equation}

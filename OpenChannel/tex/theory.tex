@@ -1,6 +1,6 @@
 \section{Theory}
 \subsection{Manning's Equation}
-The Manning's equation for the velocity and discharge of uniform flow in open channels is \cite{Chow1959,French1985,Munson2013,hds4}:
+The Manning's equation for the velocity and discharge of uniform flow in open channels is \cite{Chow1959,French1985,hds4,Munson2013}:
 \begin{equation}  
 v = \frac{K_u}{n}R^{\frac{2}{3}}S^{\frac{1}{2}},
 \label{Eq:v}
@@ -87,7 +87,7 @@ f'(t_i) = 5A''P  + 3A'P' - 2AP''.
 
 \noindent In cases where $Q$ is not a monotonically increasing function with $y$, multiple $y$ values may result in the same $Q$ value. The lowest value is returned as normal depth. 
 
-\noindent In summary, to calculate normal depth with Newton's method, we need A, P, A' and  P'. A'' and P'' are needed when $Q_{max}$ needs to be calculated using Newton's method.
+\noindent In summary, to calculate normal depth with Newton's method, we need $A$,$P$, $A'$ and $ P'$. $A''$ and $P''$ are needed when $Q_{max}$ needs to be calculated using Newton's method.
 
 \subsection{Critical Depth}
 Critical flow occurs when the specific energy
@@ -114,11 +114,13 @@ f'_c(t)= 3gA^2\frac{\partial A}{\partial t} - Q^2\frac{\partial}{\partial t}\lef
 
 \noindent The critical velocity $v_c$ is 
 \begin{equation}
-v_c = \frac{Q}{A_c} = \sqrt{g \frac{A}{\frac{\partial A}{\partial y}}} = \sqrt{gD}
+v_c = \frac{Q}{A_c} = \sqrt{g \frac{A}{\frac{\partial A}{\partial y}}} = \sqrt{gD_h}
 \end{equation}
-where $D = A/\frac{\partial A}{\partial y}$ is the hydraulic depth.
+where $D_h = A/\frac{\partial A}{\partial y}$ is the hydraulic depth.
 
 \noindent The Froude number, $F = v/v_c$. The critical slope $S_c$ is backcalculated from Eq. (\ref{Eq:v}).
+
+\noindent In summary, $A$,$P$, $A'$ and $ P'$ are needed to calculate normal depth $y_n$, $A$,$P$, $A'$, $ P'$, $A''$ and $P''$ to calculate $t_{max}$, $y_{max}$, $Q_{max}$, and  $\frac{\partial A}{\partial y}$,  $\frac{\partial A}{\partial t}$, and $\frac{\partial}{\partial t} \left(\frac{\partial A}{\partial t}\right)$ to calculate $t_c$ and $y_c$ using Newton's method.
 
 %\begin{equation}  
 %f_c(y_{i})= 1 - \frac{Q^2}{gA^3}\frac{\partial A}{\partial y} 

@@ -168,20 +168,29 @@ A'' = 2ab\sin2\alpha
 \end{equation}
 
 \begin{equation}
-T = 2a\sin\alpha 
-\end{equation}
-
-\begin{equation}
 y = b(1 - \cos\alpha) 
 \end{equation}
 
 \begin{equation}
-\frac{\partial y}{\partial \alpha} = b \sin\alpha
+y' = \frac{\partial y}{\partial \alpha} = b \sin\alpha
 \end{equation}
 
 \begin{equation}
-\cos \alpha =1 - y/b 
+\frac{\partial A}{\partial y} = \frac{A'}{y'} = 2a\sin\alpha = T_w
 \end{equation}
+
+\begin{equation}
+\frac{\partial }{\partial \alpha}\left(\frac{\partial A}{\partial y}\right) = 2a\cos\alpha
+\end{equation}
+
+\begin{equation}
+D_h = \frac{A'}{\frac{\partial A}{\partial y}} = \frac{b(\alpha - \frac{1}{2}\sin 2 \alpha)}{ 2\sin\alpha}
+\end{equation}
+
+\noindent Neton's method is used to calculate normal depth $y_n$,  critical depth $y_c$, $\alpha_{max}$, $y_{max}$, and $Q_{max}$.
+%\begin{equation}
+%\cos \alpha =1 - y/b 
+%\end{equation}
 
 %\begin{figure}[h]
 %\centering
@@ -223,7 +232,7 @@ y = b(1 - \cos\alpha)
 %\end{tikzpicture}
 %\end{figure}
 
-\subsection{Calculate Maximum Discharge Using Manning's Equation}
+%\subsection{Calculate Maximum Discharge Using Manning's Equation}
 %\begin{equation}  
 %Q = \frac{K_u}{n}AR^{2/3}S^{1/2} = \frac{K_u}{n}A^{5/3}P^{-2/3}S^{1/2},
 %\end{equation}
@@ -231,54 +240,54 @@ y = b(1 - \cos\alpha)
 %\begin{equation}  
 %\frac{dQ}{d\theta} = \frac{K_u}{n} \left(\frac{5}{3}R^{2/3}\frac{\partial A}{\partial \theta} -  \frac{2}{3}R^{5/3}\frac{\partial P}{\partial \theta} \right) S^{1/2}=0,
 %\end{equation}
-To reach maximum capacity, the $\alpha$ is solved using Newton-Raphson method
+%To reach maximum capacity, the $\alpha$ is solved using Newton-Raphson method
 
-\begin{equation}  
-\alpha _{i+1} = \alpha _i - \frac{f(\alpha _i)}{f'(\alpha_i)},
-\end{equation}
+%\begin{equation}  
+%\alpha _{i+1} = \alpha _i - \frac{f(\alpha _i)}{f'(\alpha_i)},
+%\end{equation}
 
-with Eq. \ref{Eq:CircularMaxQ},
+%with Eq. \ref{Eq:CircularMaxQ},
 
-\begin{equation}  
-f(\alpha) = 5A'P -  2AP' = 0,
-\end{equation}
-and
-\begin{equation}  
-f'(\alpha) = 3A'P' + 5A''P - 2AP''.
-\end{equation}
+%\begin{equation}  
+%f(\alpha) = 5A'P -  2AP' = 0,
+%\end{equation}
+%and
+%\begin{equation}  
+%f'(\alpha) = 3A'P' + 5A''P - 2AP''.
+%\end{equation}
 
-\subsection{Calculate Normal Depth}
-For $Q$ less than $Q_{max}$,
-\begin{equation}  
-\alpha_{i+1} = \alpha_i -\frac{f_d(\alpha_{i})}{f'_d(\alpha_{i})}
-\end{equation}
-where
-\begin{equation}  
-f_d(\alpha_{i})= \frac{K_u}{n}A^{5/3}P^{-2/3}S^{1/2} - Q 
-\end{equation}
+%\subsection{Calculate Normal Depth}
+%For $Q$ less than $Q_{max}$,
+%\begin{equation}  
+%\alpha_{i+1} = \alpha_i -\frac{f_d(\alpha_{i})}{f'_d(\alpha_{i})}
+%\end{equation}
+%where
+%\begin{equation}  
+%f_d(\alpha_{i})= \frac{K_u}{n}A^{5/3}P^{-2/3}S^{1/2} - Q 
+%\end{equation}
 
-\begin{equation}  
-f'_d(\alpha_{i})= \frac{K_u}{n}\left(\frac{5}{3}R^{2/3}A' -  \frac{2}{3}R^{5/3}P'\right)S^{1/2}
-\end{equation}
-
-
-
-\subsection{Calculate Critical Depth}
-
-\begin{equation}  
-\frac{\partial A}{\partial y} (\alpha)= \frac{\frac{\partial A}{\partial \alpha}}{\frac{\partial y}{\partial \alpha}}=\frac{ab(1 - \cos2\alpha)}{b\sin \alpha} = 2a\sin \alpha
-\end{equation}
-
-\begin{equation}  
-\frac{\partial}{\partial \alpha} \left(\frac{\partial A}{\partial y} \right) =2  a \cos \alpha
-\end{equation}
+%\begin{equation}  
+%f'_d(\alpha_{i})= \frac{K_u}{n}\left(\frac{5}{3}R^{2/3}A' -  \frac{2}{3}R^{5/3}P'\right)S^{1/2}
+%\end{equation}
 
 
-\begin{equation}  
-f_c(\alpha)= gA^3 - Q^2\frac{\partial A}{\partial y} =  gA^3 - 2aQ^2 \sin\alpha
-\end{equation}
 
-\begin{equation}  
-f'_c(\alpha)= 3gA^2\frac{\partial A}{\partial \alpha} - Q^2\frac{\partial}{\partial \alpha} \left(\frac{\partial A}{\partial y} \right)
-\end{equation}
+%\subsection{Calculate Critical Depth}
+
+%\begin{equation}  
+%\frac{\partial A}{\partial y} (\alpha)= \frac{\frac{\partial A}{\partial \alpha}}{\frac{\partial y}{\partial \alpha}}=\frac{ab(1 - \cos2\alpha)}{b\sin \alpha} = 2a\sin \alpha
+%\end{equation}
+
+%\begin{equation}  
+%\frac{\partial}{\partial \alpha} \left(\frac{\partial A}{\partial y} \right) =2  a \cos \alpha
+%\end{equation}
+
+
+%\begin{equation}  
+%f_c(\alpha)= gA^3 - Q^2\frac{\partial A}{\partial y} =  gA^3 - 2aQ^2 \sin\alpha
+%\end{equation}
+
+%\begin{equation}  
+%f'_c(\alpha)= 3gA^2\frac{\partial A}{\partial \alpha} - Q^2\frac{\partial}{\partial \alpha} \left(\frac{\partial A}{\partial y} \right)
+%\end{equation}
 
