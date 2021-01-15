@@ -94,10 +94,48 @@ v &= a\sin \alpha  \\
 \cos^2\alpha = \frac{1}{1+\tan^2\alpha}=\frac{a^2}{a^2+b^2\tan^2\beta}
 \end{equation}
 
-
 \begin{equation}
 r^2 = a^2\sin^2\alpha + b^2\cos^2\alpha
 \end{equation}
+
+\begin{equation}
+y = b(1 - \cos\alpha) 
+\end{equation}
+
+\begin{equation}
+\cos\alpha =1 - \frac{y}{b}
+\end{equation}
+
+\begin{equation}
+y' = \frac{\partial y}{\partial \alpha} = b \sin\alpha
+\end{equation}
+
+\subsection{Flow Area}
+The flow area is
+\begin{equation}
+A = 2 \int_{b\cos\alpha }^b v du = -2ab\int^0_\alpha \sin^2tdt =  ab\int_0^\alpha (1 - \cos 2t) dt = ab(\alpha - \frac{1}{2}\sin 2 \alpha)
+\end{equation}
+
+\begin{equation}
+A' = ab(1 - \cos2\alpha)
+\end{equation}
+
+\begin{equation}
+A'' = 2ab\sin2\alpha
+\end{equation}
+
+\begin{equation}
+\frac{\partial A}{\partial y} = \frac{A'}{y'} = 2a\sin\alpha = T_w
+\end{equation}
+
+\begin{equation}
+\frac{\partial }{\partial \alpha}\left(\frac{\partial A}{\partial y}\right) = 2a\cos\alpha
+\end{equation}
+
+\begin{equation}
+D_h = \frac{A'}{\frac{\partial A}{\partial y}} = \frac{b(\alpha - \frac{1}{2}\sin 2 \alpha)}{ 2\sin\alpha}
+\end{equation}
+
 
 \subsection{Wet Perimeter}
 \subsubsection{$a \ge b$}
@@ -113,13 +151,28 @@ E(\alpha, \eta) = \alpha -\frac{1}{2}\eta^2\int_0^\alpha \sin^2 tdt - \frac{1}{2
 
 \begin{equation}
 \begin{aligned}
-\int \sin^n t dt &= -\frac{1}{n} \sin^{n-1} \cos t + \frac{n}{n-1} \int \sin^{n-2} t dt \\
+\int \sin^n t dt &= -\frac{1}{n} \sin^{n-1} \cos t + \frac{n-1}{n} \int \sin^{n-2} t dt \\
 \int_0^\alpha \sin^2 tdt &=  -\frac{1}{2}\sin \alpha \cos\alpha + \frac{1}{2}\alpha \\
 \int_0^\alpha \sin^4 t dt &= -\frac{1}{4}\sin^3 \alpha  \cos \alpha + \frac{3}{4} \int_0^\alpha \sin^2 t dt \\
 \int_0^\alpha \sin^6 t dt &= -\frac{1}{6}\sin^5 \alpha  \cos \alpha + \frac{5}{6} \int_0^\alpha \sin^4 t dt \\
 \int_0^\alpha \sin^{2n} t dt &= -\frac{1}{2n}\sin^{2n-1} \alpha  \cos \alpha + \frac{2n-1}{2n} \int_0^\alpha \sin^{2n-2} t dt 
 \end{aligned}
 \end{equation}
+
+\begin{center}
+\begin{tabular}{| c | c | c | c | c | c | c | }
+\hline
+n & $a_n$ & $b_n$ & $c_n$ & $d_n$ & $e_n$ & $f_n$\\ 
+\hline
+1 & $-\frac{1}{2}\eta^2$              &  $-\frac{1}{2}$    & $\sin\alpha \cos\alpha$ &  $\frac{1}{2}$        & $b_1c_1 + d_1\alpha$   & $a_1e_1$ \\ 
+2 & $a_1 \frac{\eta^2}{4}$          &  $-\frac{1}{4}$    &  $c_1 \sin^2\alpha$       &  $\frac{3}{4}$        & $b_2c_2 + d_2e_1$       & $a_2e_2$   \\  
+3 & $a_2 \frac{\eta^2}{6}$          &  $-\frac{1}{6}$    &  $c_2 \sin^2\alpha$       &  $\frac{5}{6}$        & $b_3c_3 + d_3e_2$       & $a_3e_3$   \\  
+n & $a_{n-1} \frac{\eta^2}{2n}$ &   $-\frac{1}{2n}$ &  $c_{n-1} \sin^2\alpha$ & $\frac{2n-1}{2n}$ & $b_nc_n + d_ne_{n-1}$ & $a_ne_n$  \\
+\hline
+\end{tabular}
+\end{center}
+
+
 
 \subsubsection{$a < b$}
 
@@ -151,40 +204,6 @@ P' = 2\sqrt{a^2\cos^2\alpha + b^2\sin^2\alpha}
 
 \begin{equation}
 P'' =-\frac{(a^2-b^2)\sin2\alpha}{\sqrt{a^2\sin^2\alpha + b^2\cos^2\alpha}} 
-\end{equation}
-
-\subsection{Flow Area}
-The flow area is
-\begin{equation}
-A = 2 \int_{b\cos\alpha }^b v du = -2ab\int^0_\alpha \sin^2tdt =  ab\int_0^\alpha (1 - \cos 2t) dt = ab(\alpha - \frac{1}{2}\sin 2 \alpha)
-\end{equation}
-
-\begin{equation}
-A' = ab(1 - \cos2\alpha)
-\end{equation}
-
-\begin{equation}
-A'' = 2ab\sin2\alpha
-\end{equation}
-
-\begin{equation}
-y = b(1 - \cos\alpha) 
-\end{equation}
-
-\begin{equation}
-y' = \frac{\partial y}{\partial \alpha} = b \sin\alpha
-\end{equation}
-
-\begin{equation}
-\frac{\partial A}{\partial y} = \frac{A'}{y'} = 2a\sin\alpha = T_w
-\end{equation}
-
-\begin{equation}
-\frac{\partial }{\partial \alpha}\left(\frac{\partial A}{\partial y}\right) = 2a\cos\alpha
-\end{equation}
-
-\begin{equation}
-D_h = \frac{A'}{\frac{\partial A}{\partial y}} = \frac{b(\alpha - \frac{1}{2}\sin 2 \alpha)}{ 2\sin\alpha}
 \end{equation}
 
 \noindent Neton's method is used to calculate normal depth $y_n$,  critical depth $y_c$, $\alpha_{max}$, $y_{max}$, and $Q_{max}$.

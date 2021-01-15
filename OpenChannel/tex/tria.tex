@@ -23,11 +23,12 @@ P = \left(\sqrt{1+z_1^2} + \sqrt{1+z_2^2}\right)y
 \end{equation}
 
 \begin{equation}
-R = \frac{1}{2}\frac{(z_1 + z_2) }{\sqrt{1+z_1^2} + \sqrt{1+z_2^2}}y
+R_h = \frac{1}{2}\frac{(z_1 + z_2) }{\sqrt{1+z_1^2} + \sqrt{1+z_2^2}}y
 \end{equation}
 For normal flow, Eq. (\ref{Eq:Q}) becomes
 \begin{equation}
 Q = \frac{K_u}{n} \frac{z_1 + z_2}{2}  \left(\frac{1}{2}\frac{z_1 + z_2}{\sqrt{1+z_1^2} + \sqrt{1+z_2^2}}\right)^{\frac{2}{3}} y^{\frac{8}{3}}S^{\frac{1}{2}}.
+\label{Eq:TriaNormal}
 \end{equation}
 Note this equation can be used to backcalculate normal depth $y_n$ from $Q$.
 \begin{equation}
@@ -42,6 +43,7 @@ f_c(y)= \frac{g}{8}(z_1 + z_2)^3y^6 - Q^2(z_1 + z_2)y = 0.
 
 \begin{equation}  
 y_c^5 = \frac{8Q^2}{g(z_1 + z_2)^2}
+\label{Eq:TriaCritical}
 \end{equation}
 
 \begin{equation}  
@@ -51,3 +53,5 @@ D_h = \frac{A}{\frac{\partial A}{\partial y}} = \frac{\frac{1}{2} (z_1 + z_2) y^
 \begin{equation}  
 v_c = \sqrt{\frac{1}{2}g(z_1 + z_2)y_c}
 \end{equation}
+
+\noindent Analytical solution is derived for normal depth (Eq. \ref{Eq:TriaNormal}) and critical depth (Eq. \ref{Eq:TriaCritical}).

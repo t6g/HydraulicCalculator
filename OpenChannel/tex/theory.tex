@@ -2,11 +2,11 @@
 \subsection{Manning's Equation}
 The Manning's equation for the velocity and discharge of uniform flow in open channels is \cite{Chow1959,French1985,hds4,Munson2013}:
 \begin{equation}  
-v = \frac{K_u}{n}R^{\frac{2}{3}}S^{\frac{1}{2}},
+v = \frac{K_u}{n}R_h^{\frac{2}{3}}S^{\frac{1}{2}},
 \label{Eq:v}
 \end{equation}
 \begin{equation}  
-Q = vA = \frac{K_u}{n}AR^{\frac{2}{3}}S^{\frac{1}{2}}=\frac{K_u}{n}A^{\frac{5}{3}}P^{-\frac{2}{3}}S^{\frac{1}{2}},
+Q = vA = \frac{K_u}{n}AR_h^{\frac{2}{3}}S^{\frac{1}{2}}=\frac{K_u}{n}A^{\frac{5}{3}}P^{-\frac{2}{3}}S^{\frac{1}{2}},
 \label{Eq:Q}
 \end{equation}
 where
@@ -14,7 +14,7 @@ where
 \item[] $v$ = Mean velocity, m/s (ft/s),
 \item[] $Q$ = Discharge, $m^3/s$ ($ft^3/s$),
 \item[] $n$ = Manning's coefficient of roughness,
-\item[] $R$ = Hydraulic radius, m (ft). $R = P/A$,
+\item[] $R_h$ = Hydraulic radius, m (ft). $R_h = P/A$,
 \item [] $P$ = Wetted perimeter, m (ft),
 \item [] $A$ = Crossing-section area of flowing water perpendicular to the direction of flow, $m^2$ ($ft^2$),
 \item[] $S$ = Energy slope, m/m (ft/ft). For steady uniform flow $S=S_0$ , and
@@ -34,7 +34,7 @@ y_{i+1} = y_i -\frac{f_d(y_{i})}{f_d'(y_{i})}
 \end{equation}
 where
 \begin{equation}  
-f'_d(y_{i})=\frac{\partial f_d}{\partial y}= \frac{K_u}{n}S^{\frac{1}{2}}\left(\frac{5}{3}R^{\frac{2}{3}}\frac{\partial A}{\partial y} -  \frac{2}{3}R^{\frac{5}{3}}\frac{\partial P}{\partial y}\right)
+f'_d(y_{i})=\frac{\partial f_d}{\partial y}= \frac{K_u}{n}S^{\frac{1}{2}}\left(\frac{5}{3}R_h^{\frac{2}{3}}\frac{\partial A}{\partial y} -  \frac{2}{3}R_h^{\frac{5}{3}}\frac{\partial P}{\partial y}\right) = \frac{K_u}{3n}S^{\frac{1}{2}}R_h^{\frac{2}{3}}\left(5A' -  2R_hP'\right)
 \end{equation}
 
 \noindent until 
@@ -67,7 +67,7 @@ with
 For open channel flow in closed conduits such as circular, elliptical, and arch pipes, the calculated discharge peaks before the pipe is full \cite{Chow1959,French1985,Munson2013}. 
 The normal depth $y_{max}$ or $t_{max}$ at peak discharge $Q_{max}$ can be calculated by solving
 \begin{equation}  
-\frac{\partial Q}{\partial t} = \frac{K_u}{n} \left(\frac{5}{3}R^{\frac{2}{3}}\frac{\partial A}{\partial t} -  \frac{2}{3}R^{\frac{5}{3}}\frac{\partial P}{\partial t}\right) S^{\frac{1}{2}}=0.
+\frac{\partial Q}{\partial t} = \frac{K_u}{3n} R_h^{\frac{2}{3}} \left(5\frac{\partial A}{\partial t} -  2 \frac{A}{P}\frac{\partial P}{\partial t}\right) S^{\frac{1}{2}}=0.
 \end{equation}
 or
 \begin{equation}  
@@ -120,7 +120,7 @@ where $D_h = A/\frac{\partial A}{\partial y}$ is the hydraulic depth.
 
 \noindent The Froude number, $F = v/v_c$. The critical slope $S_c$ is backcalculated from Eq. (\ref{Eq:v}).
 
-\noindent In summary, $A$,$P$, $A'$ and $ P'$ are needed to calculate normal depth $y_n$, $A$,$P$, $A'$, $ P'$, $A''$ and $P''$ to calculate $t_{max}$, $y_{max}$, $Q_{max}$, and  $\frac{\partial A}{\partial y}$,  $\frac{\partial A}{\partial t}$, and $\frac{\partial}{\partial t} \left(\frac{\partial A}{\partial t}\right)$ to calculate $t_c$ and $y_c$ using Newton's method.
+\noindent In summary, $A$, $P$, $A'$ and $ P'$ are needed to calculate normal depth $y_n$, $A$, $P$, $A'$, $ P'$, $A''$ and $P''$ to calculate $t_{max}$, $y_{max}$, $Q_{max}$, and  $\frac{\partial A}{\partial y}$,  $\frac{\partial A}{\partial t}$, and $\frac{\partial}{\partial t} \left(\frac{\partial A}{\partial y}\right)$ to calculate $t_c$ and $y_c$ using Newton's method.
 
 %\begin{equation}  
 %f_c(y_{i})= 1 - \frac{Q^2}{gA^3}\frac{\partial A}{\partial y} 

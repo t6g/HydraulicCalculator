@@ -40,46 +40,35 @@ A= 2xy - \int_{-x}^x 4\frac{d}{T^2}x^2 dx = \frac{16}{3}\frac{d}{T^2}x^3 = \frac
 
 \noindent To calculate $P$ % and $P'$,
 \begin{equation}  
-P= 2\int_0^y \sqrt{1 + (dx/dy)^2}dy
-\end{equation}
-
-\begin{equation}  
 \frac{\partial y}{\partial x}= 8\frac{d}{T^2}x
 \end{equation}
 
 \begin{equation}  
-\left(\frac{\partial y}{\partial x}\right)^2= 16\frac{d}{T^2}y =  \frac{y}{a}
+\left(\frac{\partial y}{\partial x}\right)^2 = 8\frac{d}{T^2}8\frac{d}{T^2} x^2 = 16\frac{d}{T^2}y =  \frac{y}{a}
 \end{equation}
 with $a = T^2/16d$
 
 \begin{equation}  
-\int \sqrt{1+\frac{a}{t}}dt = \frac{a}{2}\ln\left(\sqrt{1+\frac{a}{t}} +1\right) 
-                                              - \frac{a}{2}\ln\left(|\sqrt{1+\frac{a}{t}} -1|\right)
-                                             + x\sqrt{1+\frac{a}{t}} + c 
+\frac{\partial P}{\partial y}= 2\sqrt{1 + (dx/dy)^2} = 2\sqrt{1 + \frac{a}{y}}
 \end{equation}
+
+
+
+%\begin{equation}  
+%\int \sqrt{1+\frac{a}{t}}dt = \frac{a}{2}\ln\left(\sqrt{1+\frac{a}{t}} +1\right) 
+%                                              - \frac{a}{2}\ln\left(|\sqrt{1+\frac{a}{t}} -1|\right)
+%                                             + x\sqrt{1+\frac{a}{t}} + c 
+%%\end{equation}
 \begin{equation}  
-\int \sqrt{1+\frac{a}{t}}dx = \frac{a}{2}\ln \left| \frac{\sqrt{1+\frac{a}{t}} +1}{\sqrt{1+\frac{a}{t}} -1}\right| 
+\int \sqrt{1+\frac{a}{t}}dx = \frac{a}{2}\ln \frac{\sqrt{1+\frac{a}{t}} +1}{\sqrt{1+\frac{a}{t}} -1} 
                                              + \sqrt{t^2+at} + c 
-                                             = \frac{a}{2}\ln \left| \frac{\sqrt{t^2+at} +t}{\sqrt{t^2+at} -t}\right| 
+                                             = \frac{a}{2}\ln \frac{\sqrt{t^2+at} +t}{\sqrt{t^2+at} -t} 
                                              + \sqrt{t^2+at} + c 
 \end{equation}
 
+\noindent Let $b = \sqrt{y^2 + ay}$,
 \begin{equation}  
-P= 2\int_0^y \sqrt{1 + (dx/dy)^2}dy = 2\int_0^y \sqrt{1 + \frac{a}{y}} dy 
-= a \ln \left| \frac{\sqrt{y^2 + ay} + y}{\sqrt{y^2 + ay} -  y} \right| 
-+ 2\sqrt{y^2 + ay}
-\end{equation}
-
-\begin{equation}  
-\frac{dP}{dy}= a \frac{\frac{2y + a}{\sqrt{y^2 + ay}} + 1}{\sqrt{y^2 + ay} + y}
-                       - a \frac{\frac{2y + a}{\sqrt{y^2+ay}}-1}{\sqrt{y^2 + ay}-y}
-                       + \frac{2y + a}{\sqrt{y^2+ay}}
-\end{equation}
-
-\noindent Let $z = \sqrt{y^2 + ay}$, 
-\begin{equation}  
-\frac{dP}{dy} = a \frac{\frac{2y + a}{z} + 1}{z + y} - a \frac{\frac{2y + a}{z}-1}{z-y} + \frac{2y + a}{z}
-                       = a \frac{2y + a + z}{z^2 + yz} - a \frac{2y + a - z}{z^2 - yz} + \frac{2y + a}{z}
+P= 2\int_0^y \sqrt{1 + \frac{a}{y}}dy = = a \ln \frac{b + y}{b -  y} + 2b
 \end{equation}
 
 \begin{equation}  
@@ -90,4 +79,7 @@ D_h = \frac{A}{\frac{\partial A}{\partial y}} = \frac{ \frac{2}{3}\frac{T}{\sqrt
 v_c = \sqrt{\frac{2}{3}gy_c}
 \end{equation}
 
-\noindent Neton's method is used to calculate normal depth $y_n$ and critical depth $y_c$. 
+\noindent Neton's method is used to calculate normal depth $y_n$ and critical depth $y_c$. An initial guess for critical depth \cite{French1985} is
+\begin{equation}
+y_{c,0} =  \left(0.84 \frac{4dQ^2}{gT}\right)^{0.25}
+\end{equation}

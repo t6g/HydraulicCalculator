@@ -35,4 +35,7 @@ P = \left(\sqrt{1+z_1^2} + \sqrt{1+z_2^2}\right)y + b
 D_h = \frac{A}{\frac{\partial A}{\partial y}} = \frac{ \frac{1}{2} (z_1 + z_2) y_c^2 + by_c}{(z_1 + z_2)y_c + b}
 \end{equation}
 
-\noindent Neton's method is used to calculate normal depth $y_n$ and critical depth $y_c$.
+\noindent Neton's method is used to calculate normal depth $y_n$ and critical depth $y_c$. An initial guess for critical depth \cite{French1985} is
+\begin{equation}
+y_{c,0} = 0.81 \left(\frac{Q^2}{g z^{0.75}b^{1.25}}\right)^{0.27} - \frac{b}{30z}
+\end{equation}
