@@ -32,7 +32,8 @@ namespace OpenChannel.Model
             dc = Math.Pow(8.0 * velocity * velocity * area * area / g / (SL + SR) / (SL + SR), 1.0 / 5.0);
             double ac = 0.5 * (SL + SR) * dc * dc;
             double pc = (Math.Sqrt(1.0 + SL * SL) + Math.Sqrt(1.0 + SR * SR)) * dc;
-            vc = velocity * area / ac;
+            //vc = velocity * area / ac;
+            vc = Math.Sqrt(0.5 * g * dc);
             sc = Math.Pow(vc / (Ku / N * Math.Pow(ac / pc, 2.0 / 3.0)), 2.0);
             twn = (SL + SR) * Dn;
         }

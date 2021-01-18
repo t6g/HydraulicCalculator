@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Triangular Channel</title>
+    <style>
+        input {
+            text-align: right;
+            width:80px;
+            border:none;
+        }
+        table {
+            border-collapse:collapse;
+        }
+        td {
+            padding: 0 15px;
+        }
+    </style>
+    <script src="triangularchannel.js"></script>
+</head>
+<body>
+    <div id="graph">
+
+    </div>
+    <div>
+        <h1>Open Channel Calculator--Triangular</h1>
+        <table border="1" >
+            <tbody>
+                <tr>
+                    <td><label for="leftSideSlope">Left Side Slope (z<sub>1</sub>)</label></td>
+                    <td><input type="number" name="leftSideSlope" id="leftSideSlope" min="1" value="3" size="30"></td>
+                    <td>(H:V)</td>
+                    <td>Flow Area</td>
+                    <td id="area"></td>
+                    <td>ft<sup>2</sup></td>
+                </tr>
+                <tr>
+                    <td><label for="rightSideSlope">Right Side Slope (z<sub>2</sub>)</label></td>
+                    <td><input type="number" name="rightSideSlope" id="rightSideSlope" min="1" value="3" size="30"></td>
+                    <td>(H:V)</td>
+                    <td>Wet Perimeter</td>
+                    <td><label id="perimeter"/></td>
+                    <td>ft</td>
+            </tr>
+            <tr>
+                <td><label for="channelSlope">Channel Slope (s)</label></td>
+                <td><input type="number" name="channelSlope" id="channelSlope" min="0.001" value="0.01" step="0.001" size="30"></td>
+                <td>ft/ft</td>
+                <td>Velocity</td>
+                <td><label id="velocity" /></td>
+                <td>ft/s</td>
+            </tr>
+            <tr>
+                <td><label for="manningsN">Manning's N</label></td>
+                <td><input type="number" name="manningsN" id="manningsN" min="0.001" value="0.013" step="0.001" size="30"></td>
+                <td></td>
+                <td>Critical Depth</td>
+                <td><label id="criticalDepth" /></td>
+                <td>ft</td>
+            </tr>
+            <tr>
+                <td><label for="normalDepth">Normal Depth</label></td>
+                <td><input type="number" name="normalDepth" id="normalDepth" min="0.001" value="0.5" step="0.1" size="30"></td>
+                <td>ft</td>
+                <td>Critical Velocity</td>
+                <td><label id="criticalVelocity" /></td>
+                <td>ft/s</td>
+            </tr>
+            <tr>
+                <td><label for="discharge">Discharge</label></td>
+                <td><input type="number" name="discharge" id="discharge" min="0.001" size="30" step="0.1"></td>
+                <td></td>
+                <td>Critical Slope</td>
+                <td><label id="criticalSlope" /></td>
+                <td>ft/ft</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Froude Number</td>
+                <td><label id="froudeNumber" /></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

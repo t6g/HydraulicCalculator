@@ -31,7 +31,7 @@ namespace OpenChannel.Model
             double alpha = Math.Acos(1.0 - Dn / b);
 
             area = GetArea(alpha, a, b);
-            perimeter = GetPerimeter(alpha, area, b);
+            perimeter = GetPerimeter(alpha, a, b);
 
             velocity = Ku / N * Math.Pow(area / perimeter, 2.0 / 3.0) * Math.Pow(S, 1.0 / 2.0);
             dc = GetCriticalDepth(area * velocity, a, b, options.bUSCustomary);
@@ -92,11 +92,13 @@ namespace OpenChannel.Model
                     intsc = -sinco / 2.0 / (double)n + (2.0 * (double)n - 1.0) / 2.0 / (double)n * intsc;
                 }
 
-                prefix *= k2 / 2.0 / (double)n;
+                prefix *= k2 / 2.0 / (double)n;  //an
                 delta = prefix * intsc;
                 p -= delta;
                 n++;
-            } while (delta > Constants.TolAngle);
+
+                if (n > Constants.MaxCount) break;
+            } while (Math.Abs(2*a*delta) > Constants.TolD);
 
             return 2.0 * p * Math.Max(a, b);
         }
@@ -110,7 +112,7 @@ namespace OpenChannel.Model
             double alpha = 7.0 / 8.0 * Math.PI;
             double delta;
             double A, dA, ddA, P, dP, ddP, ds, f, df;
-
+            int cnt = 0;
             do
             {
                 A = GetArea(alpha, a, b);
@@ -129,6 +131,8 @@ namespace OpenChannel.Model
 
                 alpha -= delta;
 
+                cnt++;
+                if (cnt > Constants.MaxCount) break;
             } while (Math.Abs(delta) > 0.000001);
 
             return alpha;
