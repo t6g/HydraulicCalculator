@@ -1,0 +1,88 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{tikz}
+\usepackage{tikz-dimline} \pgfplotsset{compat=newest}
+\title{Culvert}
+\author{Guoping Tang}
+\date\today{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Equations for culvert calculations.
+\end{abstract}
+
+\section{Inlet Control Equations}
+\subsection{Unsubmerged Inlet Control Equations}
+
+$\frac{Q}{AD^{0.5}} \leq 3.5$ (1.93 SI)
+
+\begin{equation}
+\frac{HW_i}{D} = \frac{H_c}{D} + K\left[\frac{K_u Q}{AD^{0.5}}  \right]^M + K_sS
+\end{equation}
+
+\subsection{Submerged Inlet Control Equations}
+$\frac{Q}{AD^{0.5}} \geq 4.0$ (2.21 SI)
+\begin{equation}
+\frac{HW_i}{D} = c\left[\frac{K_u Q}{AD^{0.5}}  \right]^2 +Y +  K_sS
+\end{equation}
+
+where
+\begin{itemize}
+\item[] $HW_i$ = Headwater depth above inlet control section invert, ft (m),
+\item[] $D$ = Interior height of culvert barrel, ft (m),
+\item[] $H_c$ = Specific head at critical depth ($d_c + v_c^2/2g$), ft (m),
+\item[] $Q$ = Discharge, ft$^3$/s (m$^3$/s),
+\item [] $A$ = Full cross sectional area of culvert barrel , $ft^2$($m^2$),
+\item[] $S$ = Culvert barrel slope, ft/ft (m/m),
+\item[] $K_u$ = unit conversion factor, 1 for English units (1.811 for SI), and
+\item[] $K_s$ = slope correction, -0.5 (mitered inlets 0.7).
+\end{itemize}
+
+\begin{equation}
+H_c = d_c + \frac{v_c^2}{2g} = d_c + \frac{v_c^2}{2g} = d_c + \frac{D_{h,c}}{2} = d_c + \frac{A_c}{2T_c}
+\end{equation}
+
+
+\section{Outlet Control}
+For full flow conditions, energy balance equation is
+\begin{equation}
+HW_o + LS + \frac{V_u^2}{2g} = TW + \frac{V_d^2}{2g} + H_L
+\end{equation}
+where
+\begin{itemize}
+\item[] $HW_o$ = Headwater depth above the entrance invert in outlet control, ft (m),
+\item[] $V_u$ = Approach velocity, ft/s (m/s),
+\item[] $TW_o$ = Tailwater depth above the outlet invert, ft (m),
+\item[] $V_d$ = Downstream velocity, ft/s (m/s),
+\item[] $H_L$ = Sum of all losses including entrance ($H_e=K_e\frac{V^2}{2g}$), friction ($H_f=\frac{K_un^2L}{R^1.33}\frac{V^2}{2g}$),  exit ($\frac{V^2}{2g} - \frac{V_d^2}{2g}$), and other losses)$H_b$, $H_j$, ft (m),
+\item[] $K_u$ = unit conversion factor, 29 for English units (19.63 for SI),
+\item[] $L$ = Length of the culvert, ft (m), and
+\item[] $S$ = Culvert barrel slope, ft/ft (m/m),
+\end{itemize}
+
+In general, $V_u$ and $V_d$ are neglected
+\begin{equation}
+HW_o =\max(TW, \frac{d_c + D}{2}) + H_L - LS = \max(TW, \frac{d_c + D}{2}) - LS + \left(1 + K_e +  \frac{K_un^2L}{R^1.33}\right)\frac{V^2}{2g}
+\end{equation}
+with $V = Q/A$ where $A$ is the full cross section area.
+
+For unsubmerged outlet, 
+%\input{theory.tex}
+%\input{tria.tex}
+%\input{rect.tex}
+%\input{trap.tex}
+%\input{para.tex}
+%\input{irre.tex}
+%\input{circ.tex}
+%\input{elli.tex}
+%\input{arch.tex}
+
+%\bibliographystyle{plain}
+%\bibliography{OpenChannel}
+
+\end{document}
